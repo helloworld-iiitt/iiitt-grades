@@ -1,0 +1,15 @@
+*~
+config.py
+__pycache__/
+cse15.csv
+cse16.csv
+cse17.csv
+cse18.csv
+cse19.csv
+ece15.csv
+ece16.csv
+ece17.csv
+ece18.csv
+ece19.csv
+email_roll.csv
+supplementary.csv
