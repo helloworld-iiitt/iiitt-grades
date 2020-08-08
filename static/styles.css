@@ -1,0 +1,98 @@
+.custom_navbar {
+  display: flex;
+  justify-content: center;
+}
+
+.iiitt_logo {
+  max-width: 100%;
+}
+
+.navbar {
+  background-color: #3f51b5;
+}
+
+.navbar-brand {
+  padding: 0.5rem;
+  color: white;
+}
+
+.navbar-brand:hover {
+  color: white;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+}
+
+.navbar-text {
+  color: white;
+}
+/* #3f51b5 */
+
+.root {
+  display: flex;
+  justify-content: center;
+  height: 79vh;
+  align-items: center;
+}
+
+.bi-heart {
+  color: white;
+  margin-top: 3px;
+}
+
+.footer {
+  background-color: #3f51b5;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.stick_down {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.button {
+  width: 17%;
+  font-size: 1.3rem;
+  margin: 0 3rem;
+}
+
+.custom_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+.results_table {
+  width: 70%;
+}
+
+.results_table > tbody > tr > td {
+  padding: 0.2rem;
+  text-align: center;
+}
+
+.results_table > tbody > tr > th {
+  padding: 0.2rem;
+  text-align: center;
+}
+
+.med {
+  font-size: 1.7rem;
+}
+
+.sm-md {
+  font-size: 1.3rem;
+}
+
+.info {
+  width: 70%;
+  margin-bottom: 1rem;
+}
+
+.disclaimer {
+  background: #FDE652;
+}
