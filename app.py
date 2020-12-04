@@ -29,7 +29,8 @@ note: this could be obsolete if lot of records are there
 TODO: Query from db instead of reading from file into memory
 '''
 # Load grades into memory
-grades = [[None, None, None, None, None], [None, None, None, None, None]]
+#  CSE, ECE, PHD
+grades = [[None, None, None, None, None], [None, None, None, None, None], [None]]
 
 grades[0][0] = open('./cse19.csv').readlines()
 grades[0][1] = open('./cse18.csv').readlines()
@@ -41,6 +42,7 @@ grades[1][1] = open('./ece18.csv').readlines()
 grades[1][2] = open('./ece17.csv').readlines()
 grades[1][3] = open('./ece16.csv').readlines()
 grades[1][3] = open('./ece15.csv').readlines()
+grades[2][0] = open('./phd.csv').readlines()
 
 supp = open('./supplementary.csv').readlines()
 
@@ -67,24 +69,33 @@ def fetch_results(branch, year, email):
     results: Dict (with sub code as key and grade as value)
     Also, passed, failed are part of results
     '''
-    results = {}
-    br = -1
-
-    today = date.today()
-    yr = today.year%100
-    if today.month >= 6:
-        yr-=1
-    yr -= year
     email_col = 0 # this has to be manually updated according to the dataset
     roll_col = 1
     name_col = 2
     sub_start_id = 3 # this is where the grades start
+
+    results = {}
+    br = -1
+
+    today = date.today()
+    if year != '':
+        yr = today.year%100
+        if today.month >= 6:
+            yr-=1
+        yr -= year
+    else:
+        yr = 0
+
     if branch == 'C':
         #  grades[0]
         br = 0
-    else:
+    elif branch == 'E':
         #  grades[1]
         br = 1
+    elif branch == 'PHD':
+        # grades[2]
+        br = 2
+
     header = grades[br][yr][0].strip().split(',') # 0th row is not required
     for row in grades[br][yr]:
         fields = row.strip().split(',')
@@ -217,9 +228,13 @@ def callback():
 @app.route('/getresults')
 @login_required
 def getresults():
-    year = int(current_user.rollno[3:5])
-    branch = current_user.rollno[0].upper()
-    results = fetch_results(branch.upper(), year, current_user.email)
+    if 'c' in current_user.rollno.lower():
+        year = int(current_user.rollno[3:5])
+        branch = current_user.rollno[0].upper()
+        results = fetch_results(branch.upper(), year, current_user.email)
+    else:
+        results = fetch_results('PHD', '', current_user.email)
+
     if len(results) == 0:
         return (
             '<h2>Error has occurred. Please contact the class coordinator</h2>'
@@ -228,6 +243,7 @@ def getresults():
             '<br />'
             '<a href="/logout" class="btn btn-primary">Click here to Logout</a>'
         )
+
     return render_template('results.html', user=current_user, results=results)
 
 @app.route('/getsupplementary')
