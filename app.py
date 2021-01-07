@@ -80,9 +80,9 @@ def fetch_results(branch, year, email):
     today = date.today()
     if year != '':
         yr = today.year%100
-        if today.month >= 6:
-            yr-=1
-        yr -= year
+        #  if today.month >= 6:
+            #  yr-=1
+        yr -= year + 2
     else:
         yr = 0
 
