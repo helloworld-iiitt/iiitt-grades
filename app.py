@@ -32,19 +32,19 @@ TODO: Query from db instead of reading from file into memory
 #  CSE, ECE, PHD
 grades = [[None, None, None, None, None], [None, None, None, None, None], [None]]
 
-grades[0][0] = open('./cse19.csv').readlines()
-grades[0][1] = open('./cse18.csv').readlines()
-grades[0][2] = open('./cse17.csv').readlines()
-grades[0][3] = open('./cse16.csv').readlines()
-grades[0][3] = open('./cse15.csv').readlines()
-grades[1][0] = open('./ece19.csv').readlines()
-grades[1][1] = open('./ece18.csv').readlines()
-grades[1][2] = open('./ece17.csv').readlines()
-grades[1][3] = open('./ece16.csv').readlines()
-grades[1][3] = open('./ece15.csv').readlines()
-grades[2][0] = open('./phd.csv').readlines()
+grades[0][0] = open('./24may2023_cse21.csv').readlines()
+grades[0][1] = open('./24may2023_cse20.csv').readlines()
+grades[0][2] = open('./24may2023_cse19.csv').readlines()
+#grades[0][3] = open('./cse16.csv').readlines()
+#grades[0][3] = open('./cse15.csv').readlines()
+grades[1][0] = open('./24may2023_ece21.csv').readlines()
+grades[1][1] = open('./24may2023_ece20.csv').readlines()
+grades[1][2] = open('./24may2023_ece19.csv').readlines()
+#grades[1][3] = open('./ece16.csv').readlines()
+#grades[1][3] = open('./ece15.csv').readlines()
+grades[2][0] = open('./24may2023_mtech_phd.csv').readlines()
 
-supp = open('./supplementary.csv').readlines()
+supp = open('./supplementary.csv').readlines() #old
 
 supplementary = {}
 
@@ -228,9 +228,16 @@ def callback():
 @app.route('/getresults')
 @login_required
 def getresults():
-    if 'c' in current_user.rollno.lower():
-        year = int(current_user.rollno[3:5])
-        branch = current_user.rollno[0].upper()
+    CoE = {'1':'C','2':'E'}
+    if 'c' in current_user.rollno.lower() or current_user.rollno.lower()[2] == '1':
+        if 'c' in current_user.rollno.lower():
+            year = int(current_user.rollno[3:5])
+            branch = current_user.rollno[0].upper()
+        elif current_user.rollno.lower()[2] == '1':
+            year = int(current_user.rollno[0:2])
+            branch = CoE[current_user.rollno.lower()[3]]
+        if current_user.rollno == "201112":
+            year = 21
         results = fetch_results(branch.upper(), year, current_user.email)
     else:
         results = fetch_results('PHD', '', current_user.email)
