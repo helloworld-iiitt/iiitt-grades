@@ -32,14 +32,16 @@ TODO: Query from db instead of reading from file into memory
 #  CSE, ECE, PHD
 grades = [[None, None, None, None, None], [None, None, None, None, None], [None]]
 
-grades[0][0] = open('./24may2023_cse21.csv').readlines()
-grades[0][1] = open('./24may2023_cse20.csv').readlines()
-grades[0][2] = open('./24may2023_cse19.csv').readlines()
+grades[0][0] = open('./14jul2023_cse22.csv').readlines()
+grades[0][1] = open('./24may2023_cse21.csv').readlines()
+grades[0][2] = open('./24may2023_cse20.csv').readlines()
+grades[0][3] = open('./24may2023_cse19.csv').readlines()
 #grades[0][3] = open('./cse16.csv').readlines()
 #grades[0][3] = open('./cse15.csv').readlines()
-grades[1][0] = open('./24may2023_ece21.csv').readlines()
-grades[1][1] = open('./24may2023_ece20.csv').readlines()
-grades[1][2] = open('./24may2023_ece19.csv').readlines()
+grades[1][0] = open('./14jul2023_ece22.csv').readlines()
+grades[1][1] = open('./24may2023_ece21.csv').readlines()
+grades[1][2] = open('./24may2023_ece20.csv').readlines()
+grades[1][3] = open('./24may2023_ece19.csv').readlines()
 #grades[1][3] = open('./ece16.csv').readlines()
 #grades[1][3] = open('./ece15.csv').readlines()
 grades[2][0] = open('./24may2023_mtech_phd.csv').readlines()
@@ -82,7 +84,7 @@ def fetch_results(branch, year, email):
         yr = today.year%100
         #  if today.month >= 6:
             #  yr-=1
-        yr -= year + 2
+        yr -= year + 1 # +2 for not declaring first year result
     else:
         yr = 0
 
